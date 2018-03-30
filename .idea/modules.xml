@@ -4,10 +4,8 @@
     <modules>
       <module fileurl="file://C:\Users\Administrator\Desktop\library\MvpBase.iml" filepath="C:\Users\Administrator\Desktop\library\MvpBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Administrator\Desktop\library\app\app.iml" filepath="C:\Users\Administrator\Desktop\library\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library.iml" filepath="$PROJECT_DIR$/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvp/mvp.iml" filepath="$PROJECT_DIR$/mvp/mvp.iml" />
-      <module fileurl="file://C:\Users\Administrator\Desktop\library\mvp\mvp.iml" filepath="C:\Users\Administrator\Desktop\library\mvp\mvp.iml" />
     </modules>
   </component>
 </project>

@@ -9,9 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.thl.mvp.MvpConfig;
-import com.thl.mvp.event.BusProvider;
 import com.thl.mvp.kit.KnifeKit;
 
 import butterknife.Unbinder;
@@ -26,8 +23,6 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
     private VDelegate vDelegate;
     private P p;
     protected Activity context;
-
-    private RxPermissions rxPermissions;
 
     private Unbinder unbinder;
 
@@ -68,14 +63,6 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
         return p;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (useEventBus()) {
-            BusProvider.getBus().register(this);
-        }
-    }
-
 
     @Override
     protected void onResume() {
@@ -90,17 +77,10 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
         getvDelegate().pause();
     }
 
-    @Override
-    public boolean useEventBus() {
-        return false;
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (useEventBus()) {
-            BusProvider.getBus().unregister(this);
-        }
         if (getP() != null) {
             getP().detachV();
         }
@@ -117,11 +97,6 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
         return super.onCreateOptionsMenu(menu);
     }
 
-    protected RxPermissions getRxPermissions() {
-        rxPermissions = new RxPermissions(this);
-        rxPermissions.setLogging(MvpConfig.DEV);
-        return rxPermissions;
-    }
 
     @Override
     public int getOptionsMenuId() {
@@ -132,7 +107,6 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
     public void bindEvent() {
 
     }
-
 
 
     //region软键盘的处理

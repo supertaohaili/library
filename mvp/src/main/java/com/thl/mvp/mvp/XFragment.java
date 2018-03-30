@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.thl.mvp.MvpConfig;
-import com.thl.mvp.event.BusProvider;
 import com.thl.mvp.kit.KnifeKit;
 
 import butterknife.Unbinder;
@@ -25,7 +23,6 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
     private View rootView;
     protected LayoutInflater layoutInflater;
 
-    private RxPermissions rxPermissions;
 
     private Unbinder unbinder;
 
@@ -51,9 +48,6 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (useEventBus()) {
-            BusProvider.getBus().register(this);
-        }
         bindEvent();
         initData(savedInstanceState);
     }
@@ -95,17 +89,8 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
     }
 
     @Override
-    public boolean useEventBus() {
-        return false;
-    }
-
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (useEventBus()) {
-            BusProvider.getBus().unregister(this);
-        }
         if (getP() != null) {
             getP().detachV();
         }
@@ -115,11 +100,7 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
         vDelegate = null;
     }
 
-    protected RxPermissions getRxPermissions() {
-        rxPermissions = new RxPermissions(getActivity());
-        rxPermissions.setLogging(MvpConfig.DEV);
-        return rxPermissions;
-    }
+
 
     @Override
     public int getOptionsMenuId() {
