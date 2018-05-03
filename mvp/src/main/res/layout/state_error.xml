@@ -8,16 +8,17 @@
 
     <ImageView
         android:id="@+id/iv_error_state"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_empty_state_200px" />
 
     <TextView
         android:id="@+id/tv_error_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="出错啦……点击重试"
-        android:textSize="14sp" />
+        android:layout_marginTop="10dp"
+        android:textColor="#939292"
+        android:text="出错啦,点击重试..."
+        android:textSize="10sp" />
 
 </LinearLayout>

@@ -9,7 +9,7 @@ import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import com.thl.mvp.R;
 
 
-public abstract class ListActivity<P extends IPresent> extends StateActivity {
+public abstract class ListActivity<P extends IPresent> extends StateActivity<P> {
 
     private TwinklingRefreshLayout refreshLayout;
     private RecyclerView mRecyclerView;

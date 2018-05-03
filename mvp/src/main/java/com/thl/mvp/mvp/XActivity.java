@@ -108,6 +108,15 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
 
     }
 
+    @Override
+    public boolean useEventBus() {
+        return false;
+    }
+
+    @Override
+    public P newP() {
+        return null;
+    }
 
     //region软键盘的处理
     @Override

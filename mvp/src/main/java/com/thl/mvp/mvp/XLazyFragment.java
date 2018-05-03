@@ -4,11 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.thl.mvp.kit.KnifeKit;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.Unbinder;
-import com.thl.mvp.MvpConfig;
-import com.thl.mvp.event.BusProvider;
 
 /**
  * Created on 2017/1/26.
@@ -19,7 +16,6 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
     private VDelegate vDelegate;
     private P p;
 
-    private RxPermissions rxPermissions;
     private Unbinder unbinder;
 
     @Override
@@ -30,7 +26,7 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
             bindUI(getRealRootView());
         }
         if (useEventBus()) {
-            BusProvider.getBus().register(this);
+
         }
         bindEvent();
         initData(savedInstanceState);
@@ -68,7 +64,7 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
     protected void onDestoryLazy() {
         super.onDestoryLazy();
         if (useEventBus()) {
-            BusProvider.getBus().unregister(this);
+
         }
         if (getP() != null) {
             getP().detachV();
@@ -79,12 +75,6 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
         vDelegate = null;
     }
 
-
-    protected RxPermissions getRxPermissions() {
-        rxPermissions = new RxPermissions(getActivity());
-        rxPermissions.setLogging(MvpConfig.DEV);
-        return rxPermissions;
-    }
 
 
     @Override

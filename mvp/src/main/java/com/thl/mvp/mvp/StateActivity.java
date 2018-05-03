@@ -10,7 +10,7 @@ import www.thl.com.utils.NetworkUtils;
  * Created by Administrator on 2018/3/23.
  */
 
-public abstract class StateActivity<P extends IPresent> extends XActivity implements StateView {
+public abstract class StateActivity<P extends IPresent> extends XActivity<P> implements StateView {
 
     protected StateManager mStateManager;
 

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.thl.mvp.kit.KnifeKit;
 
 import butterknife.Unbinder;

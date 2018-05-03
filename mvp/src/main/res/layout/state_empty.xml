@@ -8,15 +8,16 @@
 
     <ImageView
         android:id="@+id/iv_empty_state"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_empty_state_200px" />
 
     <TextView
         android:id="@+id/tv_empty_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#939292"
         android:text="暂无数据，点击重试..."
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 </LinearLayout>

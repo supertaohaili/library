@@ -8,6 +8,9 @@ import android.view.View;
  */
 
 public interface IView<P> {
+
+    public int getLayoutId();
+
     public void bindUI(View rootView);
 
     public void bindEvent();
@@ -15,8 +18,6 @@ public interface IView<P> {
     public void initData(Bundle savedInstanceState);
 
     public int getOptionsMenuId();
-
-    public int getLayoutId();
 
     public boolean useEventBus();
 
