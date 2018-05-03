@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.thl.mvp.demo.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/flt_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:textColor="#333333"
+            android:text="内容内容"/>
+    </FrameLayout>
+
 </LinearLayout>

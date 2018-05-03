@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.gyf.barlibrary.ImmersionBar;
+
 import java.lang.reflect.Field;
 
 /**
@@ -36,10 +38,14 @@ public class LazyFragment extends Fragment {
 
     private static final String TAG_ROOT_FRAMELAYOUT = "tag_root_framelayout";
 
+    protected ImmersionBar mImmersionBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (isImmersionBarEnabled()) {
+            initImmersionBar();
+        }
         this.layoutInflater = inflater;
         this.container = container;
         onCreateView(savedInstanceState);
@@ -83,6 +89,15 @@ public class LazyFragment extends Fragment {
             onCreateViewLazy(savedInstanceState);
             isInitReady = true;
         }
+    }
+
+    protected boolean isImmersionBarEnabled() {
+        return false;
+    }
+
+    protected void initImmersionBar() {
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false).init();
     }
 
     protected View getRealRootView() {
@@ -136,6 +151,9 @@ public class LazyFragment extends Fragment {
             isInitReady = true;
             onCreateViewLazy(saveInstanceState);
             onResumeLazy();
+            if (isImmersionBarEnabled()) {
+                initImmersionBar();
+            }
         }
         if (isInitReady && getRootView() != null) {
             if (isVisibleToUser) {
@@ -222,12 +240,20 @@ public class LazyFragment extends Fragment {
         isInitReady = false;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();
+    }
+
     protected View getPreviewLayout(LayoutInflater mInflater, FrameLayout layout) {
         return null;
     }
 
     protected void onCreateViewLazy(Bundle savedInstanceState) {
-
+        if (isImmersionBarEnabled())
+            initImmersionBar();
     }
 
     protected void onStartLazy() {

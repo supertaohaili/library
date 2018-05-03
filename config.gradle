@@ -53,6 +53,8 @@ ext {
             "SuperTextView"             : "com.github.supertaohaili:SuperTextView:1.0.2",
             "Http"                        : "com.github.supertaohaili:Http:1.0.0",
             "HiPermission"               : "com.github.supertaohaili:Permission:1.0.1",
+            "ImmersionBar"               : "com.github.supertaohaili:ImmersionBar:1.0.5",
+            "Bottomnavigation"               : "com.github.supertaohaili:Bottomnavigation:1.0.1",
 
     ]
 

@@ -37,5 +37,7 @@ dependencies {
     compile rootProject.ext.dependencies["Http"]
     compile rootProject.ext.dependencies["crashreport_upgrade"]
     compile rootProject.ext.dependencies["HiPermission"]
+    compile rootProject.ext.dependencies["ImmersionBar"]
+    compile rootProject.ext.dependencies["Bottomnavigation"]
 }
 

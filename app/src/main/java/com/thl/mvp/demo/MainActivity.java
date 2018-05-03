@@ -1,27 +1,28 @@
 package com.thl.mvp.demo;
 
-import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.app.Fragment;
 
-import com.thl.mvp.mvp.StateActivity;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.thl.mvp.mvp.BottomMenuActivity;
 
-public class MainActivity extends StateActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class MainActivity extends BottomMenuActivity {
 
-    @Override
-    public void initData(Bundle savedInstanceState) {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showNetError();
-            }
-        },3000);
-    }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_main2;
-    }
+    protected void initBottomMenu(ArrayList<AHBottomNavigationItem> bottomNavigationItems, List<Fragment> fragmentList) {
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem("首页", R.drawable.sel_home);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("首页", R.drawable.sel_home);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("首页", R.drawable.sel_home);
 
+        bottomNavigationItems.add(item1);
+        bottomNavigationItems.add(item2);
+        bottomNavigationItems.add(item3);
+
+        fragmentList.add(new DemoFragment());
+        fragmentList.add(new DemoFragment());
+        fragmentList.add(new DemoFragment());
+    }
 }

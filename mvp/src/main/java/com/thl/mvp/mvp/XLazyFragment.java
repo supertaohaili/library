@@ -16,6 +16,7 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
     private VDelegate vDelegate;
     private P p;
 
+
     private Unbinder unbinder;
 
     @Override
@@ -76,7 +77,6 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
     }
 
 
-
     @Override
     public int getOptionsMenuId() {
         return 0;
@@ -88,5 +88,10 @@ public abstract class XLazyFragment<P extends IPresent> extends LazyFragment imp
         return false;
     }
 
+
+    @Override
+    public P newP() {
+        return null;
+    }
 
 }

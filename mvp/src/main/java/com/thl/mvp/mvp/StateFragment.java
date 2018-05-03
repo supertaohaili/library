@@ -17,16 +17,18 @@ public abstract class StateFragment<P extends IPresent> extends XLazyFragment<P>
     @Override
     public void bindUI(View rootView) {
         super.bindUI(rootView);
-        mStateManager = StateManager.builder(getActivity())
-                .setContent(this.getStateView())//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
-                .setErrorOnClickListener(getErrorListener())
-                .setNetErrorOnClickListener(getNetErrorListener())
-                .setEmptyOnClickListener(getEmptyListener())
-                .setConvertListener(getConvertListener())
-                .build();//构建
-        if (!NetworkUtils.isNetworkConnected() && isCheckNet()) {
-            showNetError();
-        } else {
+        if (mStateManager==null) {
+            mStateManager = StateManager.builder(getActivity())
+                    .setContent(this.getStateView())//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
+                    .setErrorOnClickListener(getErrorListener())
+                    .setNetErrorOnClickListener(getNetErrorListener())
+                    .setEmptyOnClickListener(getEmptyListener())
+                    .setConvertListener(getConvertListener())
+                    .build();//构建
+            if (!NetworkUtils.isNetworkConnected()) {
+                showNetError();
+                return;
+            }
             showLoading();
             loadNetData();
         }

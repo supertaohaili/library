@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.thl.mvp.kit.KnifeKit;
 
 import butterknife.Unbinder;
@@ -25,6 +26,7 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
     protected Activity context;
 
     private Unbinder unbinder;
+    protected ImmersionBar mImmersionBar;
 
 
     @Override
@@ -37,9 +39,23 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
             bindUI(null);
             bindEvent();
         }
+        if (isImmersionBarEnabled())
+            initImmersionBar();
         initData(savedInstanceState);
 
     }
+
+    protected void initImmersionBar() {
+        if (mImmersionBar == null) {
+            mImmersionBar = ImmersionBar.with(this);
+            mImmersionBar.init();
+        }
+    }
+
+    protected boolean isImmersionBarEnabled() {
+        return false;
+    }
+
 
     @Override
     public void bindUI(View rootView) {
@@ -87,6 +103,9 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
         getvDelegate().destory();
         p = null;
         vDelegate = null;
+        if (mImmersionBar != null) {
+            mImmersionBar.destroy();  //在BaseActivity里销毁
+        }
     }
 
     @Override
@@ -116,6 +135,13 @@ public abstract class XActivity<P extends IPresent> extends AppCompatActivity im
     @Override
     public P newP() {
         return null;
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        KeyboardUtils.hideSoftInput(this);
     }
 
     //region软键盘的处理
