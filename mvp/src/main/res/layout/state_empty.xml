@@ -19,5 +19,5 @@
         android:layout_marginTop="10dp"
         android:textColor="#939292"
         android:text="暂无数据，点击重试..."
-        android:textSize="10sp" />
+        android:textSize="11sp" />
 </LinearLayout>

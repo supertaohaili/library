@@ -19,6 +19,6 @@
         android:layout_marginTop="10dp"
         android:textColor="#939292"
         android:text="网络异常，点击设置"
-        android:textSize="10sp" />
+        android:textSize="11sp" />
 
 </LinearLayout>

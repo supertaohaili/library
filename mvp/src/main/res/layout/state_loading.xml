@@ -18,6 +18,6 @@
         android:layout_marginTop="10dp"
         android:text="玩命加载中..."
         android:textColor="#939292"
-        android:textSize="10sp" />
+        android:textSize="11sp" />
 
 </LinearLayout>

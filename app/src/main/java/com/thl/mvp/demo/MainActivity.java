@@ -14,7 +14,7 @@ public class MainActivity extends StateActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                showError();
+                showNetError();
             }
         },3000);
     }
