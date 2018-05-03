@@ -36,5 +36,6 @@ dependencies {
     compile rootProject.ext.dependencies["SuperTextView"]
     compile rootProject.ext.dependencies["Http"]
     compile rootProject.ext.dependencies["crashreport_upgrade"]
+    compile rootProject.ext.dependencies["HiPermission"]
 }
 

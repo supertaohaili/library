@@ -52,6 +52,7 @@ ext {
             "Dialog"                     : "com.github.supertaohaili:Dialog:1.0.0",
             "SuperTextView"             : "com.github.supertaohaili:SuperTextView:1.0.2",
             "Http"                        : "com.github.supertaohaili:Http:1.0.0",
+            "HiPermission"               : "com.github.supertaohaili:Permission:1.0.1",
 
     ]
 
