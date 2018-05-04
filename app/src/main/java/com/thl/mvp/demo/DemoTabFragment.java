@@ -23,21 +23,21 @@ public class DemoTabFragment extends TabFragment {
     protected void initTabs(List<String> titles, List<Fragment> fragments) {
         titles.add("tab");
         titles.add("tab2");
-//        titles.add("tab3");
-//        titles.add("tab4");
-//        titles.add("tab5");
-//        titles.add("tab6");
-//        titles.add("tab7");
-//        titles.add("tab8");
+        titles.add("tab3");
+        titles.add("tab4");
+        titles.add("tab5");
+        titles.add("tab6");
+        titles.add("tab7");
+        titles.add("tab8");
         fragments.add(new DemoFragment());
         fragments.add(new DemoFragment());
-//        fragments.add(new DemoFragment());
-//
-//        fragments.add(new DemoFragment());
-//        fragments.add(new DemoFragment());
-//        fragments.add(new DemoFragment());
-//        fragments.add(new DemoFragment());
-//        fragments.add(new DemoFragment());
+        fragments.add(new DemoFragment());
+
+        fragments.add(new DemoFragment());
+        fragments.add(new DemoFragment());
+        fragments.add(new DemoFragment());
+        fragments.add(new DemoFragment());
+        fragments.add(new DemoFragment());
     }
 
     @Override
