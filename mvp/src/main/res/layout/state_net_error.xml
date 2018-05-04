@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_net_error_state"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/ic_empty_state_200px" />
 
     <TextView
@@ -17,8 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="#939292"
         android:text="网络异常，点击设置"
-        android:textSize="11sp" />
+        android:textColor="#939292"
+        android:textSize="10sp" />
 
 </LinearLayout>

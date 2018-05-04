@@ -1,7 +1,6 @@
 package com.thl.mvp.mvp;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,22 +8,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.thl.mvp.kit.KnifeKit;
 
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportFragment;
 
 
-public abstract class XFragment<P extends IPresent> extends Fragment implements IView<P> {
+public abstract class XFragment<P extends IPresent> extends SupportFragment implements IView<P> {
 
-    private VDelegate vDelegate;
-    private P p;
+    protected VDelegate vDelegate;
+    protected P p;
     protected Activity context;
-    private View rootView;
+    protected View rootView;
     protected LayoutInflater layoutInflater;
 
 
     private Unbinder unbinder;
 
+    private boolean isVisible = false;//当前Fragment是否可见
+    private boolean isInitView = false;//是否与View建立起映射关系
+    private boolean isFirstLoad = true;//是否是第一次加载数据
+
+    protected ImmersionBar mImmersionBar;
 
     @Nullable
     @Override
@@ -39,7 +45,62 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
                 viewGroup.removeView(rootView);
             }
         }
+        isInitView = true;
+        lazyLoadData();
+        return rootView;
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isImmersionBarEnabled()) {
+            initImmersionBar();
+        }
+    }
+
+    protected void initImmersionBar() {
+        mImmersionBar = ImmersionBar.with(getActivity());
+        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false).init();
+    }
+
+    protected boolean isImmersionBarEnabled() {
+        return false;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if (isVisibleToUser) {
+            isVisible = true;
+            lazyLoadData();
+        } else {
+            isVisible = false;
+        }
+        if (!isVisibleToUser && mImmersionBar != null)
+            mImmersionBar.init();
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    private void lazyLoadData() {
+        if (isFirstLoad) {
+        } else {
+        }
+        if (!isFirstLoad || !isVisible || !isInitView) {
+            return;
+        }
+        LazyData();
+        isFirstLoad = false;
+    }
+
+
+    /**
+     * 加载要显示的数据
+     */
+    protected void LazyData() {
+
+    }
+
+
+    protected View getRealRootView() {
         return rootView;
     }
 
@@ -47,6 +108,9 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (useEventBus()) {
+
+        }
         bindEvent();
         initData(savedInstanceState);
     }
@@ -94,11 +158,17 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
             getP().detachV();
         }
         getvDelegate().destory();
-
         p = null;
         vDelegate = null;
     }
 
+    @Override
+    public void onDestroy() {
+
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();
+        super.onDestroy();
+    }
 
 
     @Override
@@ -109,5 +179,20 @@ public abstract class XFragment<P extends IPresent> extends Fragment implements 
     @Override
     public void bindEvent() {
 
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public boolean useEventBus() {
+        return false;
+    }
+
+    @Override
+    public P newP() {
+        return null;
     }
 }

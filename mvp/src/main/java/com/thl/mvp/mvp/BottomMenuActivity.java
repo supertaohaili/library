@@ -15,9 +15,6 @@ import com.thl.mvp.log.XLog;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2018/5/3.
- */
 
 public abstract class BottomMenuActivity extends StateActivity {
 
@@ -39,19 +36,14 @@ public abstract class BottomMenuActivity extends StateActivity {
         super.bindUI(rootView);
         mBottomNavigationViewPager = (BottomNavigationViewPager) findViewById(R.id.bottomNavigationViewPager);
         mBottomNavigation = (BottomNavigation) findViewById(R.id.bottomNavigation);
-
         fragmentList = new ArrayList<>();
-
-
         bottomNavigationItems = new ArrayList<>();
         initBottomMenu(bottomNavigationItems, fragmentList);
-
-        mXFragmentAdapter = new XFragmentAdapter(getSupportFragmentManager(), fragmentList, null);
+        mXFragmentAdapter = new XFragmentAdapter(getSupportFragmentManager(), fragmentList);
         mBottomNavigationViewPager.setAdapter(mXFragmentAdapter);
-
         mBottomNavigation.addItems(bottomNavigationItems);
         mBottomNavigation.setTranslucentNavigationEnabled(true);
-        mBottomNavigationViewPager.setPagingEnabled(false);
+        mBottomNavigationViewPager.setPagingEnabled(true);
 
         mBottomNavigation.setOnTabSelectedListener(new BottomNavigation.OnTabSelectedListener() {
             @Override
@@ -59,7 +51,7 @@ public abstract class BottomMenuActivity extends StateActivity {
                 if (wasSelected) {
                     return true;
                 }
-                mBottomNavigationViewPager.setCurrentItem(position);
+                mBottomNavigationViewPager.setCurrentItem(position, false);
                 return true;
             }
         });
@@ -73,7 +65,7 @@ public abstract class BottomMenuActivity extends StateActivity {
             @Override
             public void onPageSelected(int position) {
                 mBottomNavigation.setCurrentItem(position);
-                XLog.e("position","position:"+position);
+                XLog.e("position", "position:" + position);
             }
 
             @Override
@@ -81,15 +73,55 @@ public abstract class BottomMenuActivity extends StateActivity {
 
             }
         });
+        initBottomNavigation(mBottomNavigation);
+        initNavigationViewPager(mBottomNavigationViewPager);
+    }
+
+    protected void initBottomNavigation(BottomNavigation mBottomNavigation) {
+    }
+
+    protected void initNavigationViewPager(BottomNavigationViewPager mBottomNavigationViewPager) {
 
     }
 
     protected abstract void initBottomMenu(ArrayList<AHBottomNavigationItem> bottomNavigationItems, List<Fragment> fragmentList);
 
+    protected void repaceBottomMenu(ArrayList<AHBottomNavigationItem> bottomNavigationItems, List<Fragment> fragmentList) {
+        this.bottomNavigationItems.clear();
+        this.bottomNavigationItems.addAll(bottomNavigationItems);
+
+        this.fragmentList.clear();
+        this.fragmentList.addAll(fragmentList);
+
+
+        mBottomNavigation.removeAllItems();
+        mBottomNavigation.addItems(this.bottomNavigationItems);
+
+        mXFragmentAdapter.notifyDataSetChanged();
+    }
+
+    protected void addBottomMenu(ArrayList<AHBottomNavigationItem> bottomNavigationItems, List<Fragment> fragmentList) {
+        this.bottomNavigationItems.addAll(bottomNavigationItems);
+
+        this.fragmentList.clear();
+        this.fragmentList.addAll(fragmentList);
+
+        mBottomNavigation.removeAllItems();
+        mBottomNavigation.addItems(this.bottomNavigationItems);
+        mXFragmentAdapter.notifyDataSetChanged();
+
+    }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         showContent();
+    }
 
+    public BottomNavigationViewPager getmBottomNavigationViewPager() {
+        return mBottomNavigationViewPager;
+    }
+
+    public BottomNavigation getmBottomNavigation() {
+        return mBottomNavigation;
     }
 }

@@ -13,13 +13,14 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.thl.mvp.kit.KnifeKit;
 
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportActivity;
 import www.thl.com.utils.KeyboardUtils;
 
 /**
  * Created on 2016/12/29.
  */
 
-public abstract class XActivity<P extends IPresent> extends AppCompatActivity implements IView<P> {
+public abstract class XActivity<P extends IPresent> extends SupportActivity implements IView<P> {
 
     private VDelegate vDelegate;
     private P p;

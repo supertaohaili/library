@@ -13,9 +13,16 @@ import java.util.List;
 
 public class XFragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList = new ArrayList<>();
-    private String[] titles;
+    private List<String> titles;
 
-    public XFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, String[] titles) {
+    public XFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+        super(fm);
+        this.fragmentList.clear();
+        this.fragmentList.addAll(fragmentList);
+
+    }
+
+    public XFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> titles) {
         super(fm);
         this.fragmentList.clear();
         this.fragmentList.addAll(fragmentList);
@@ -24,8 +31,8 @@ public class XFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (titles != null && titles.length > position) {
-            return titles[position];
+        if (titles != null && titles.size() > position) {
+            return titles.get(position);
         }
         return "";
     }

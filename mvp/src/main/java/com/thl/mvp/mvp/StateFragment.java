@@ -1,5 +1,6 @@
 package com.thl.mvp.mvp;
 
+import android.os.Bundle;
 import android.view.View;
 
 import cn.thl.view.statemanager.StateListener;
@@ -10,14 +11,14 @@ import www.thl.com.utils.NetworkUtils;
  * Created by Administrator on 2018/3/23.
  */
 
-public abstract class StateFragment<P extends IPresent> extends XLazyFragment<P> implements StateView {
+public abstract class StateFragment<P extends IPresent> extends XFragment<P> implements StateView {
 
     protected StateManager mStateManager;
 
     @Override
     public void bindUI(View rootView) {
         super.bindUI(rootView);
-        if (mStateManager==null) {
+        if (mStateManager == null) {
             mStateManager = StateManager.builder(getActivity())
                     .setContent(this.getStateView())//为哪部分内容添加状态管理。这里可以是Activity，Fragment或任何View。
                     .setErrorOnClickListener(getErrorListener())
@@ -25,16 +26,23 @@ public abstract class StateFragment<P extends IPresent> extends XLazyFragment<P>
                     .setEmptyOnClickListener(getEmptyListener())
                     .setConvertListener(getConvertListener())
                     .build();//构建
-            if (!NetworkUtils.isNetworkConnected()) {
+            if (!NetworkUtils.isNetworkConnected() && isCheckNet()) {
                 showNetError();
-                return;
+            } else {
+                showLoading();
+                loadNetData();
             }
-            showLoading();
-            loadNetData();
         }
     }
 
-    protected abstract Object getStateView();
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    protected Object getStateView() {
+        return getRealRootView();
+    }
 
     protected boolean isCheckNet() {
         return false;
