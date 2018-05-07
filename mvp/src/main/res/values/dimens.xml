@@ -5,7 +5,7 @@
     <dimen name="bottom_navigation_min_width">104dp</dimen>
     <dimen name="bottom_navigation_max_width">168dp</dimen>
     <dimen name="bottom_navigation_height">50dp</dimen>
-    <dimen name="bottom_navigation_icon">24dp</dimen>
+    <dimen name="bottom_navigation_icon">25dp</dimen>
 
     <dimen name="bottom_navigation_margin_top_active">3dp</dimen>
     <dimen name="bottom_navigation_margin_top_inactive">5dp</dimen>
